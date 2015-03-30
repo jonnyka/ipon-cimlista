@@ -22,11 +22,6 @@
 {% endif %}
 {% include "AppBundle:Default:_menu.html.twig" with {activeNav: m} %}
 
-
-{% if app.user %}
-    {% include "AppBundle:Default:terminal.html.twig" %}
-{% endif %}
-
 {% block flashMessages %}
     {% for type, flashBag in app.session.flashbag.all() %}
         {% for flashMessage in flashBag %}

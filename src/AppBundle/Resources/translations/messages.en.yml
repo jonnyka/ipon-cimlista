@@ -1,6 +1,27 @@
 app_bundle:
   menu:
     sajt: 'Sajt'
+  message:
+    back: 'Back'
+    logo: 'iPon people list'
+    welcome: 'Welcome to the iPon people list'
+  person:
+    address: 'Address'
+    mail: 'E-mail'
+    name: 'Name'
+    people: 'People list'
+    personCreate: 'Create person'
+    phone: 'Phone'
+  validate:
+    person:
+      name:
+        empty: 'The name cannot be empty'
+      mail:
+        empty: 'The mail cannot be empty'
+      phone:
+        empty: 'The phone cannot be empty'
+      address:
+        empty: 'The address cannot be empty'
 
 user_bundle:
   form:
