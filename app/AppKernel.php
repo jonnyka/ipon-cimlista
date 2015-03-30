@@ -7,7 +7,6 @@ class AppKernel extends Kernel
 {
     public function registerBundles()
     {
-        /*
         $bundles = array(
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new Symfony\Bundle\SecurityBundle\SecurityBundle(),
@@ -28,8 +27,6 @@ class AppKernel extends Kernel
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
         }
-        */
-        $bundles = array();
 
         return $bundles;
     }

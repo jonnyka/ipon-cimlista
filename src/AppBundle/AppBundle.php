@@ -1,9 +1,9 @@
 <?php
 
-namespace Sed\UniOfficeManager\AppBundle;
+namespace AppBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class SedUniOfficeManagerAppBundle extends Bundle
+class AppBundle extends Bundle
 {
 }

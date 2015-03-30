@@ -18,9 +18,3 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
-
-    # Base url for socket.io
-    socket_method: http
-    socket_url: 127.0.0.1
-    socket_port: 8090
-    socket_port_local: 1337

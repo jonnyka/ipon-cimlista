@@ -19,8 +19,6 @@
         "sensio/distribution-bundle": "~3.0,>=3.0.12",
         "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
         "incenteev/composer-parameter-handler": "~2.0",
-        "chrisboulton/php-resque": "1.2.x",
-        "bcc/resque-bundle": "1.1.8.*@dev",
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "oodle/krumo": "0.5.0",
         "oodle/krumo-bundle": "1.0.2"

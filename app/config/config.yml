@@ -30,9 +30,6 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
-    globals:
-        socket_url: "%socket_method%://%socket_url%:%socket_port%"
-        socket_ip: "%socket_url%"
     form_themes:
       - 'AppBundle:Form:bootstrap_3_layout.html.twig'
 
@@ -82,7 +79,7 @@ swiftmailer:
 fos_user:
     db_driver: orm
     firewall_name: main
-    user_class: UserBundle\Entity\SedUser
+    user_class: UserBundle\Entity\IponUser
     use_listener: false
     registration:
         confirmation:
