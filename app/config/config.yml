@@ -34,13 +34,13 @@ twig:
         socket_url: "%socket_method%://%socket_url%:%socket_port%"
         socket_ip: "%socket_url%"
     form_themes:
-      - 'SedUniOfficeManagerAppBundle:Form:bootstrap_3_layout.html.twig'
+      - 'AppBundle:Form:bootstrap_3_layout.html.twig'
 
 # Assetic Configuration
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ 'SedUniOfficeManagerAppBundle', 'SedUniOfficeManagerUserBundle' ]
+    bundles:        [ 'AppBundle', 'UserBundle' ]
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
@@ -82,14 +82,14 @@ swiftmailer:
 fos_user:
     db_driver: orm
     firewall_name: main
-    user_class: Sed\UniOfficeManager\UserBundle\Entity\SedUser
+    user_class: UserBundle\Entity\SedUser
     use_listener: false
     registration:
         confirmation:
             enabled:    true
     from_email:
-        address: drupal@sed.inf.u-szeged.hu
-        sender_name: Hteam
+        address: gnagy@inf.u-szeged.hu
+        sender_name: Gergo Nagy
 
 #bcc_resque:
     #prefix: unioffice-manager

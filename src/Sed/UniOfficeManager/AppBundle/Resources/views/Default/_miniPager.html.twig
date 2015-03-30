@@ -1,7 +1,0 @@
-<p class="lead">
-    {% if showingAll %}
-        {{ "sed_uniofficemanager_app_bundle.queue.oldestFirst" | trans({'%jobsLength%': jobs|length}) | raw }} - <a href="{{ app.request.uri | replace({'?all=1': ''}) }}">{% trans %}sed_uniofficemanager_app_bundle.queue.showRecent{% endtrans %}</a>
-    {% else %}
-        {{ "sed_uniofficemanager_app_bundle.queue.newestFirst" | trans({'%jobsLength%': jobs|length}) | raw }} - <a href="{{ app.request.uri }}?all=1">{% trans %}sed_uniofficemanager_app_bundle.queue.showAll{% endtrans %}</a>
-    {% endif %}
-</p>

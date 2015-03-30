@@ -1,0 +1,28 @@
+{% import _self as nav %}
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse">
+            <div class="container">
+                <a class="navbar-brand" href="{{ path('welcome') }}"><img src="{{ asset('bundles/app/images/logo.png') }}" width="32px"></a>
+                <a class="navbar-brand" href="{{ path('welcome') }}">{% trans %}app_bundle.message.logo{% endtrans %}</a>
+
+                <ul class="nav navbar-nav">
+                    <li {{ nav.activeClass(activeNav, 'welcome') }}>
+                        <a href="{{ path('welcome') }}">
+                            {% trans %}app_bundle.site.sites{% endtrans %}
+                        </a>
+                    </li>
+                </ul>
+
+                {{ render(controller('UserBundle:User:login')) }}
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+{% macro activeClass(activeNav,item) %}
+    {% if activeNav == item %}
+    class="active"
+    {% endif %}
+{% endmacro %}

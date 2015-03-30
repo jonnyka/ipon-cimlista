@@ -1,0 +1,17 @@
+app_bundle:
+  menu:
+    sajt: 'Sajt'
+
+user_bundle:
+  form:
+    login:
+      label: 'Login'
+    logout:
+      label: 'Logout'
+    password:
+      label: 'Password'
+    username:
+      label: 'Username'
+  message:
+    loggedin: 'Welcome'
+    pleaseLogIn: 'Please log in to continue!'

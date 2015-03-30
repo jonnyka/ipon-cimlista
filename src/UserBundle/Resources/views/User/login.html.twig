@@ -1,0 +1,26 @@
+{% if app.user is null %}
+
+    <form class="navbar-form navbar-right" action="{{ path("fos_user_security_check") }}" method="post" novalidate>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+        <div class="form-group">
+            <input class="form-control" type="text" id="username" name="_username" required="required" placeholder="{{ 'user_bundle.form.username.label'|trans }}" />
+        </div>
+
+        <div class="form-group">
+            <input class="form-control" type="password" id="password" name="_password" required="required" placeholder="{{ 'user_bundle.form.password.label'|trans }}" />
+        </div>
+        <button type="submit" class="btn btn-sm btn-info">
+            {% trans %}user_bundle.form.login.label{% endtrans %}
+        </button>
+    </form>
+
+{% else %}
+    <p class="navbar-text navbar-right">
+        {% trans %}user_bundle.message.loggedin{% endtrans %},
+        {{ app.user.username }}!&nbsp;
+
+        <a href="{{ path('fos_user_security_logout') }}" class="btn btn-xs btn-warning navbar-btn">
+            {% trans %}user_bundle.form.logout.label{% endtrans %}
+        </a>
+    </p>
+{% endif %}
