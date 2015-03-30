@@ -1,0 +1,13 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+  deploy_manager.class: Sed\UniOfficeManager\AppBundle\Service\DeployManager
+  deploy_job.class: Sed\UniOfficeManager\AppBundle\Service\DeployJob
+  get_gitlab_projects.class: Sed\UniOfficeManager\AppBundle\Service\GetGitlabProjects
+
+services:
+  deploy_manager:
+    class: "%deploy_manager.class%"
+    arguments: [ '@doctrine.orm.entity_manager', '@service_container', '@bcc_resque.resque', '%kernel.root_dir%' ]
+  get_gitlab_projects:
+    class: "%get_gitlab_projects.class%"

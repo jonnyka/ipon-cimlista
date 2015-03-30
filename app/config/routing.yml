@@ -1,0 +1,17 @@
+sed_uni_office_manager_user:
+    resource: "@SedUniOfficeManagerUserBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+sed_uni_office_manager_app:
+    resource: "@SedUniOfficeManagerAppBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+BCCResqueBundle:
+    resource: "@BCCResqueBundle/Resources/config/routing.xml"
+    prefix:   /resque
+
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"

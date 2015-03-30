@@ -1,0 +1,27 @@
+{% extends 'SedUniOfficeManagerAppBundle:Default:base.html.twig' %}
+{% block body %}
+<div class="container">
+    <div class="row span11">
+        <h2>{{ "sed_uniofficemanager_app_bundle.queue.scheduledJobFor" | trans({'%date%': timestamp|date('Y-m-d H:i:s')}) | raw }}</h2>
+        <p><a href="{{ path('queue_list_scheduled') }}">Back to all Scheduled Jobs</a></p>
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th>{% trans %}sed_uniofficemanager_app_bundle.queue.job{% endtrans %}</th>
+                <th>{% trans %}sed_uniofficemanager_app_bundle.queue.details{% endtrans %}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for job in jobs %}
+                <tr>
+                    <th class="span1">{{ loop.index }}</th>
+                    <td class="span10">
+                        <pre>{{ job }}</pre>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

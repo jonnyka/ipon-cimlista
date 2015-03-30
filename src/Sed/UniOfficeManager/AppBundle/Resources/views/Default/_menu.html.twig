@@ -1,0 +1,52 @@
+{% import _self as nav %}
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse">
+            <div class="container">
+                <a class="navbar-brand" href="{{ path('welcome') }}"><img src="{{ asset('bundles/seduniofficemanagerapp/images/logo.png') }}" width="32px"></a>
+                <a class="navbar-brand" href="{{ path('welcome') }}">{% trans %}sed_uniofficemanager_app_bundle.message.logo{% endtrans %}</a>
+
+                <ul class="nav navbar-nav">
+                    <li {{ nav.activeClass(activeNav, 'site') }}>
+                        <a href="{{ path('site') }}">
+                            {% trans %}sed_uniofficemanager_app_bundle.site.sites{% endtrans %}
+                        </a>
+                    </li>
+
+                    <li {{ nav.activeClass(activeNav, 'queue_index') }}>
+                        <a href="{{ path('queue_index') }}">
+                            {% trans %}sed_uniofficemanager_app_bundle.menu.queues{% endtrans %}
+                        </a>
+                    </li>
+
+                    <li {{ nav.activeClass(activeNav, 'queue_list_scheduled') }}>
+                        <a href="{{ path('queue_list_scheduled') }}">
+                            {% trans %}sed_uniofficemanager_app_bundle.menu.scheduled{% endtrans %}
+                        </a>
+                    </li>
+
+                    <li {{ nav.activeClass(activeNav, 'queue_list_failed') }}>
+                        <a href="{{ path('queue_list_failed') }}">
+                            {% trans %}sed_uniofficemanager_app_bundle.menu.failed{% endtrans %}
+                        </a>
+                    </li>
+
+                    <li {{ nav.activeClass(activeNav, 'redis') }}>
+                        <a href="{{ path('redis') }}">
+                            {% trans %}sed_uniofficemanager_app_bundle.menu.redis{% endtrans %}
+                        </a>
+                    </li>
+                </ul>
+
+                {{ render(controller('SedUniOfficeManagerUserBundle:User:login')) }}
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+{% macro activeClass(activeNav,item) %}
+    {% if activeNav == item %}
+    class="active"
+    {% endif %}
+{% endmacro %}

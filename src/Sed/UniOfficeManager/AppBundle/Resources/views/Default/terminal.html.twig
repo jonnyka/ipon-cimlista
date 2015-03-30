@@ -1,0 +1,69 @@
+{% block stylesheets %}
+    {% stylesheets
+    '@SedUniOfficeManagerAppBundle/Resources/public/css/terminal.css'
+    filter='cssrewrite'
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/themes/base/jquery-ui.css">
+    {% endstylesheets %}
+{% endblock %}
+
+    <div class="container">
+        <div class="row span11">
+
+            <div id="terminal-window" class="ui-widget-content">
+                <div id="terminal-toolbar">
+                    <div class="terminal-top">
+                        <div id="terminal-lights">
+                            <div class="terminal-light terminal-red">
+                                <div class="terminal-glyph">×</div>
+                                <div class="terminal-shine"></div>
+                                <div class="terminal-glow"></div>
+                            </div>
+                            <div class="terminal-light terminal-yellow">
+                                <div class="terminal-glyph">-</div>
+                                <div class="terminal-shine"></div>
+                                <div class="terminal-glow"></div>
+                            </div>
+                            <div class="terminal-light terminal-green">
+                                <div class="terminal-glyph">+</div>
+                                <div class="terminal-shine"></div>
+                                <div class="terminal-glow"></div>
+                            </div>
+                        </div>
+                        <div id="terminal-title">
+                            <div class="terminal-folder">
+                                <div class="terminal-tab"></div>
+                                <div class="terminal-body"></div>
+                            </div>
+                            {% trans %}sed_uniofficemanager_app_bundle.message.terminal{% endtrans %}
+                        </div>
+                        <div id="terminal-bubble">
+                            <div class="terminal-shine"></div>
+                            <div class="terminal-glow"></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="terminal-body">
+                    <p id="terminal-output">
+                        {{ 'sed_uniofficemanager_app_bundle.message.terminalLogin' | trans({'%date%': "now" | date('D M d H:i:s') }) }}<br />
+                    <span class="terminal-cursor"></span>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% block javascripts %}
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.js"></script>
+    <script src="{{ socket_url }}/socket.io/socket.io.js"></script>
+    <script>
+        var socket_conn = "{{ socket_url }}";
+    </script>
+    {% javascripts
+    '@SedUniOfficeManagerAppBundle/Resources/public/js/socket.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
