@@ -26,17 +26,23 @@ class Person
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
-     * @Assert\NotBlank(
-     *   message = "app_bundle.validate.person.name.empty"
-     * )
      */
     protected $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="PersonData", mappedBy="person", cascade={"persist"})
-     * @Assert\Valid
+     * @ORM\Column(name="emails", type="array")
      */
-    protected $personData;
+    protected $emails;
+
+    /**
+     * @ORM\Column(name="phones", type="array")
+     */
+    protected $phones;
+
+    /**
+     * @ORM\Column(name="addresses", type="array")
+     */
+    protected $addresses;
 
     /**
      * @ORM\Column(name="createdAt", type="date")
@@ -127,45 +133,73 @@ class Person
     {
         return $this->updatedAt;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->personData = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->addPersonDatum(new PersonData());
-    }
 
     /**
-     * Add personData
+     * Set emails
      *
-     * @param PersonData $personData
+     * @param array $emails
      * @return Person
      */
-    public function addPersonDatum(PersonData $personData)
+    public function setEmails($emails)
     {
-        $this->personData[] = $personData;
+        $this->emails = $emails;
 
         return $this;
     }
 
     /**
-     * Remove personData
+     * Get emails
      *
-     * @param PersonData $personData
+     * @return array 
      */
-    public function removePersonDatum(PersonData $personData)
+    public function getEmails()
     {
-        $this->personData->removeElement($personData);
+        return $this->emails;
     }
 
     /**
-     * Get personData
+     * Set phones
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @param array $phones
+     * @return Person
      */
-    public function getPersonData()
+    public function setPhones($phones)
     {
-        return $this->personData;
+        $this->phones = $phones;
+
+        return $this;
+    }
+
+    /**
+     * Get phones
+     *
+     * @return array 
+     */
+    public function getPhones()
+    {
+        return $this->phones;
+    }
+
+    /**
+     * Set addresses
+     *
+     * @param array $addresses
+     * @return Person
+     */
+    public function setAddresses($addresses)
+    {
+        $this->addresses = $addresses;
+
+        return $this;
+    }
+
+    /**
+     * Get addresses
+     *
+     * @return array 
+     */
+    public function getAddresses()
+    {
+        return $this->addresses;
     }
 }

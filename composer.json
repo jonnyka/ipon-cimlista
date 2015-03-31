@@ -21,7 +21,8 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "oodle/krumo": "0.5.0",
-        "oodle/krumo-bundle": "1.0.2"
+        "oodle/krumo-bundle": "1.0.2",
+        "friendsofsymfony/jsrouting-bundle": "~1.5"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

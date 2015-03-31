@@ -2,7 +2,7 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\PersonData;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -13,16 +13,13 @@ use AppBundle\Form\PersonType;
 
 /**
  * Person controller.
- *
- * @Route("/person")
  */
 class PersonController extends Controller
 {
-
     /**
      * Lists all Person entities.
      *
-     * @Route("/", name="person")
+     * @Route("/admin/person/", name="person_list_admin")
      * @Method("GET")
      * @Template()
      */
@@ -39,39 +36,31 @@ class PersonController extends Controller
     /**
      * Creates a new Person entity.
      *
-     * @Route("/new", name="person_create")
+     * @Route("/admin/person/create/", name="person_create", options={"expose" = true})
      * @Method("POST")
-     * @Template("AppBundle:Person:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new Person();
-        $form = $this->createCreateForm($entity);
-        $form->submit($request);
+        $em = $this->getDoctrine()->getManager();
 
-        print_r($form->getData());
+        $name = $request->get('name');
+        $emails = $request->get('mail');
+        $phones = $request->get('phone');
+        $addresses = $request->get('address');
+        $date = new \DateTime();
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+        $person = new Person();
+        $person->setName($name);
+        $person->setEmails($emails);
+        $person->setPhones($phones);
+        $person->setAddresses($addresses);
+        $person->setCreatedAt($date);
+        $person->setUpdatedAt($date);
 
-            $date = new \DateTime();
-            $entity->setCreatedAt($date);
-            $entity->setUpdatedAt($date);
-            foreach ($entity->getPersonData() as $pd) {
-                $pd->setCreatedAt($date);
-                $pd->setUpdatedAt($date);
-            }
+        $em->persist($person);
+        $em->flush();
 
-            $em->persist($entity);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('person'));
-        }
-
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        );
+        return new JsonResponse($person);
     }
 
     /**
@@ -88,7 +77,7 @@ class PersonController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array('label' => 'Create', 'attr' => array('class' => 'btn-success')));
 
         return $form;
     }
@@ -96,7 +85,7 @@ class PersonController extends Controller
     /**
      * Displays a form to create a new Person entity.
      *
-     * @Route("/new", name="person_new")
+     * @Route("/admin/person/new/", name="person_new")
      * @Method("GET")
      * @Template()
      */
@@ -115,7 +104,7 @@ class PersonController extends Controller
     /**
      * Finds and displays a Person entity.
      *
-     * @Route("/{id}", name="person_show")
+     * @Route("/person/{id}/", name="person_show")
      * @Method("GET")
      * @Template()
      */
@@ -140,7 +129,7 @@ class PersonController extends Controller
     /**
      * Displays a form to edit an existing Person entity.
      *
-     * @Route("/{id}/edit", name="person_edit")
+     * @Route("/admin/person/{id}/edit/", name="person_edit")
      * @Method("GET")
      * @Template()
      */
@@ -185,7 +174,7 @@ class PersonController extends Controller
     /**
      * Edits an existing Person entity.
      *
-     * @Route("/{id}", name="person_update")
+     * @Route("/admin/person/{id}/", name="person_update")
      * @Method("PUT")
      * @Template("AppBundle:Person:edit.html.twig")
      */
@@ -218,7 +207,7 @@ class PersonController extends Controller
     /**
      * Deletes a Person entity.
      *
-     * @Route("/{id}", name="person_delete")
+     * @Route("/admin/person/{id}/", name="person_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)

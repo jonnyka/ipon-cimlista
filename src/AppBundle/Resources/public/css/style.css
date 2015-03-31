@@ -23,6 +23,14 @@ table.table td {
     margin-bottom: 0;
 }
 
+.red {
+    color: #960808;
+}
+
+.errorMessage {
+    vertical-align: text-bottom;
+}
+
 .row {
     margin-bottom: 10px;
 }

@@ -30,10 +30,19 @@ class Person
     protected $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="PersonData", mappedBy="person", cascade={"persist"})
-     * @Assert\Valid
+     * @ORM\Column(name="emails", type="array")
      */
-    protected $personData;
+    protected $emails;
+
+    /**
+     * @ORM\Column(name="phones", type="array")
+     */
+    protected $phones;
+
+    /**
+     * @ORM\Column(name="addresses", type="array")
+     */
+    protected $addresses;
 
     /**
      * @ORM\Column(name="createdAt", type="date")
@@ -123,35 +132,5 @@ class Person
     public function getUpdatedAt()
     {
         return $this->updatedAt;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->personData = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add personData
-     *
-     * @param PersonData $personData
-     * @return Person
-     */
-    public function addPersonData(PersonData $personData)
-    {
-        $this->personData[] = $personData;
-
-        return $this;
-    }
-
-    /**
-     * Remove personData
-     *
-     * @param PersonData $personData
-     */
-    public function removePersonData(PersonData $personData)
-    {
-        $this->personData->removeElement($personData);
     }
 }

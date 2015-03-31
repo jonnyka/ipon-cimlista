@@ -16,18 +16,9 @@ class PersonType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('personData', 'collection', array(
-                'type'  => new PersonDataType(),
-                'allow_add' => FALSE,
-                'allow_delete' => FALSE,
-                'prototype' => TRUE,
-                'by_reference' => FALSE,
-                'options' => array(
-                    'required'  => TRUE,
-                    'data_class' => 'AppBundle\Entity\PersonData',
-                ),
-                'label' => false
-            ))
+            ->add('emails')
+            ->add('phones')
+            ->add('addresses')
         ;
     }
     

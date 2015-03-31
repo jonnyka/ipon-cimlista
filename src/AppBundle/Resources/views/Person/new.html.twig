@@ -6,7 +6,7 @@
 
             {{ form(form) }}
 
-            <a class="btn btn-default pull-left" href="{{ path('person') }}">
+            <a class="btn btn-default pull-left" href="{{ path('person_list_admin') }}">
                 <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> {% trans %}app_bundle.message.back{% endtrans %}
             </a>
         </div>
@@ -17,7 +17,7 @@
 {% block javascripts %}
     {{ parent() }}
     {% javascripts
-    '@AppBundle/Resources/public/js/person.js' %}
+    '@AppBundle/Resources/public/js/personForm.js' %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
 {% endblock %}
