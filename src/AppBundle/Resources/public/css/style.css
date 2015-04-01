@@ -43,6 +43,15 @@ table.table td {
     margin-bottom: 0;
 }
 
+.deletePerson {
+    color: #960808;
+    cursor: pointer;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
 .span12{width:940px;}
 .span11{width:860px;}
 .span10{width:780px;}

@@ -1,0 +1,31 @@
+{% extends 'AppBundle:Default:base.html.twig' %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <h2>{% trans %}app_bundle.person.people{% endtrans %}</h2>
+        </div>
+
+        <div class="row">
+            <table id="personList" class="table table-hover table-bordered">
+                <thead>
+                <tr>
+                    <th class="info">{% trans %}app_bundle.person.name{% endtrans %}</th>
+                    <th class="info">{% trans %}app_bundle.person.mails{% endtrans %}</th>
+                    <th class="info">{% trans %}app_bundle.person.phones{% endtrans %}</th>
+                    <th class="info">{% trans %}app_bundle.person.addresses{% endtrans %}</th>
+                    <th class="info">{% trans %}app_bundle.person.createdAt{% endtrans %}</th>
+                </tr>
+                </thead>
+
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+    '@AppBundle/Resources/public/js/person.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

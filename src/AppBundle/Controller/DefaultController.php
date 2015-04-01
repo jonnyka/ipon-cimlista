@@ -11,15 +11,6 @@ use Symfony\Component\Process\Process;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/test/", name="test")
-     * @Template()
-     */
-    public function testAction()
-    {
-        return array();
-    }
-
-    /**
      * @Route("/", name="welcome")
      * @Template()
      */

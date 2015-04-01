@@ -45,12 +45,12 @@ class Person
     protected $addresses;
 
     /**
-     * @ORM\Column(name="createdAt", type="date")
+     * @ORM\Column(name="createdAt", type="datetime")
      */
     protected $createdAt;
 
     /**
-     * @ORM\Column(name="updatedAt", type="date")
+     * @ORM\Column(name="updatedAt", type="datetime")
      */
     protected $updatedAt;
 

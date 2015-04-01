@@ -45,12 +45,12 @@ class Person
     protected $addresses;
 
     /**
-     * @ORM\Column(name="createdAt", type="date")
+     * @ORM\Column(name="createdAt", type="datetime")
      */
     protected $createdAt;
 
     /**
-     * @ORM\Column(name="updatedAt", type="date")
+     * @ORM\Column(name="updatedAt", type="datetime")
      */
     protected $updatedAt;
 
@@ -132,5 +132,74 @@ class Person
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Set emails
+     *
+     * @param array $emails
+     * @return Person
+     */
+    public function setEmails($emails)
+    {
+        $this->emails = $emails;
+
+        return $this;
+    }
+
+    /**
+     * Get emails
+     *
+     * @return array 
+     */
+    public function getEmails()
+    {
+        return $this->emails;
+    }
+
+    /**
+     * Set phones
+     *
+     * @param array $phones
+     * @return Person
+     */
+    public function setPhones($phones)
+    {
+        $this->phones = $phones;
+
+        return $this;
+    }
+
+    /**
+     * Get phones
+     *
+     * @return array 
+     */
+    public function getPhones()
+    {
+        return $this->phones;
+    }
+
+    /**
+     * Set addresses
+     *
+     * @param array $addresses
+     * @return Person
+     */
+    public function setAddresses($addresses)
+    {
+        $this->addresses = $addresses;
+
+        return $this;
+    }
+
+    /**
+     * Get addresses
+     *
+     * @return array 
+     */
+    public function getAddresses()
+    {
+        return $this->addresses;
     }
 }

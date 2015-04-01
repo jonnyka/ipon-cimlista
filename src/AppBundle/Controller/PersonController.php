@@ -16,70 +16,118 @@ use AppBundle\Form\PersonType;
  */
 class PersonController extends Controller
 {
+
     /**
-     * Lists all Person entities.
+     * Get all Person entities.
      *
-     * @Route("/admin/person/", name="person_list_admin")
+     * @Route("/person-datatable/", name="person_get_all_datatable", options={"expose" = true})
      * @Method("GET")
-     * @Template()
      */
-    public function indexAction()
+    public function getPersonForDatatableAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        $peopleObjects = $em->getRepository('AppBundle:Person')->findAll();
 
-        $entities = $em->getRepository('AppBundle:Person')->findAll();
+        $emptyValue = '-';
 
-        return array(
-            'people' => $entities,
-        );
+        $people = array();
+        foreach ($peopleObjects as $po) {
+            $people[] = array(
+                "DT_RowId" => $po->getId(),
+                "DT_RowClass" => 'pointer',
+                'name' => $po->getName(),
+                'emails' => $po->getEmails() ? $po->getEmails()[0] : $emptyValue,
+                'phones' => $po->getPhones() ? $po->getPhones()[0] : $emptyValue,
+                'addresses' => $po->getAddresses() ? $po->getAddresses()[0] : $emptyValue,
+                'createdAt' => $po->getCreatedAt()->format('Y-m-d H:i:s'),
+            );
+        }
+
+        return new JsonResponse($people);
     }
+
     /**
-     * Creates a new Person entity.
+     * Get all Person entities.
      *
-     * @Route("/admin/person/create/", name="person_create", options={"expose" = true})
-     * @Method("POST")
+     * @Route("/person-datatable-admin/", name="person_get_all_admin_datatable", options={"expose" = true})
+     * @Method("GET")
      */
-    public function createAction(Request $request)
+    public function getPersonForDatatableAdminAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        $peopleObjects = $em->getRepository('AppBundle:Person')->findAll();
 
-        $name = $request->get('name');
-        $emails = $request->get('mail');
-        $phones = $request->get('phone');
-        $addresses = $request->get('address');
-        $date = new \DateTime();
+        $delimiter = '<br />';
+        $emptyValue = '-';
 
-        $person = new Person();
-        $person->setName($name);
-        $person->setEmails($emails);
-        $person->setPhones($phones);
-        $person->setAddresses($addresses);
-        $person->setCreatedAt($date);
-        $person->setUpdatedAt($date);
+        $people = array();
+        foreach ($peopleObjects as $po) {
+            $people[] = array(
+                "DT_RowId" => $po->getId(),
+                'name' => $po->getName(),
+                'emails' => $po->getEmails() ? implode($delimiter, $po->getEmails()) : $emptyValue,
+                'phones' => $po->getPhones() ? implode($delimiter, $po->getPhones()) : $emptyValue,
+                'addresses' => $po->getAddresses() ? implode($delimiter, $po->getAddresses()) : $emptyValue,
+                'createdAt' => $po->getCreatedAt()->format('Y-m-d H:i:s'),
+                'updatedAt' => $po->getUpdatedAt()->format('Y-m-d H:i:s'),
+                'operations' => $po->getId(),
+            );
+        }
 
-        $em->persist($person);
-        $em->flush();
+        return new JsonResponse($people);
+    }
+
+    /**
+     * Get a Person entity.
+     *
+     * @Route("/person/{id}/", name="person_get", options={"expose" = true})
+     * @Method("GET")
+     */
+    public function getPersonAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $po = $em->getRepository('AppBundle:Person')->find($id);
+
+        $person = array(
+            'id' => $po->getId(),
+            'name' => $po->getName(),
+            'emails' => $po->getEmails(),
+            'phones' => $po->getPhones(),
+            'addresses' => $po->getAddresses(),
+            'createdAt' => $po->getCreatedAt()->format('Y-m-d H:i:s'),
+            'updatedAt' => $po->getUpdatedAt()->format('Y-m-d H:i:s'),
+        );
 
         return new JsonResponse($person);
     }
 
     /**
-     * Creates a form to create a Person entity.
+     * Lists all Person entities.
      *
-     * @param Person $entity The entity
-     *
-     * @return \Symfony\Component\Form\Form The form
+     * @Route("/person/", name="person_list", options={"expose" = true})
+     * @Method("GET")
+     * @Template()
      */
-    private function createCreateForm(Person $entity)
+    public function listAction()
     {
-        $form = $this->createForm(new PersonType(), $entity, array(
-            'action' => $this->generateUrl('person_create'),
-            'method' => 'POST',
-        ));
+        return array(
+            'menu' => 'people'
+        );
+    }
 
-        $form->add('submit', 'submit', array('label' => 'Create', 'attr' => array('class' => 'btn-success')));
 
-        return $form;
+    /**
+     * Lists all Person entities for admins.
+     *
+     * @Route("/admin/person/", name="person_list_admin", options={"expose" = true})
+     * @Method("GET")
+     * @Template()
+     */
+    public function adminListAction()
+    {
+        return array(
+            'menu' => 'admin'
+        );
     }
 
     /**
@@ -98,58 +146,80 @@ class PersonController extends Controller
         return array(
             'entity' => $entity,
             'form' => $form->createView(),
+            'menu' => 'admin'
         );
     }
 
     /**
-     * Finds and displays a Person entity.
+     * Saves a Person entity.
      *
-     * @Route("/person/{id}/", name="person_show")
-     * @Method("GET")
-     * @Template()
+     * @Route("/admin/person/save/", name="person_save", options={"expose" = true})
+     * @Method("POST")
      */
-    public function showAction($id)
+    public function saveAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppBundle:Person')->find($id);
+        $id = $request->get('id');
+        $name = $request->get('name');
+        $emails = $request->get('email');
+        $phones = $request->get('phone');
+        $addresses = $request->get('address');
+        $date = new \DateTime();
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Person entity.');
+
+        $person = new Person();
+        if ($id) {
+            $person = $em->getRepository('AppBundle:Person')->find($id);
         }
+        else {
+            $person->setCreatedAt($date);
+        }
+        $person->setName($name);
+        $person->setEmails($emails);
+        $person->setPhones($phones);
+        $person->setAddresses($addresses);
+        $person->setUpdatedAt($date);
 
-        $deleteForm = $this->createDeleteForm($id);
+        $em->persist($person);
+        $em->flush();
 
-        return array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
-        );
+        return new JsonResponse($person);
+    }
+
+    /**
+     * Creates a form to create a Person entity.
+     *
+     * @param Person $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createCreateForm(Person $entity)
+    {
+        $form = $this->createForm(new PersonType(), $entity, array());
+
+        $label = $this->get('translator')->trans('app_bundle.label.create');
+        $form->add('submit', 'submit', array('label' => $label, 'attr' => array('class' => 'btn-success')));
+
+        return $form;
     }
 
     /**
      * Displays a form to edit an existing Person entity.
      *
-     * @Route("/admin/person/{id}/edit/", name="person_edit")
+     * @Route("/admin/person/edit/{id}/", name="person_edit", options={"expose" = true})
      * @Method("GET")
      * @Template()
      */
     public function editAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('AppBundle:Person')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Person entity.');
-        }
-
-        $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
+        $person = new Person();
+        $editForm = $this->createEditForm($person);
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'person' => $person,
+            'form' => $editForm->createView(),
+            'menu' => 'admin'
         );
     }
 
@@ -162,88 +232,28 @@ class PersonController extends Controller
     */
     private function createEditForm(Person $entity)
     {
-        $form = $this->createForm(new PersonType(), $entity, array(
-            'action' => $this->generateUrl('person_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
-        ));
+        $form = $this->createForm(new PersonType(), $entity, array());
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $label = $this->get('translator')->trans('app_bundle.label.update');
+        $form->add('submit', 'submit', array('label' => $label, 'attr' => array('class' => 'btn-success')));
 
         return $form;
     }
-    /**
-     * Edits an existing Person entity.
-     *
-     * @Route("/admin/person/{id}/", name="person_update")
-     * @Method("PUT")
-     * @Template("AppBundle:Person:edit.html.twig")
-     */
-    public function updateAction(Request $request, $id)
-    {
-        $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppBundle:Person')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Person entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createEditForm($entity);
-        $editForm->handleRequest($request);
-
-        if ($editForm->isValid()) {
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('person_edit', array('id' => $id)));
-        }
-
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
-    }
     /**
      * Deletes a Person entity.
      *
-     * @Route("/admin/person/{id}/", name="person_delete")
+     * @Route("/admin/person/{id}/", name="person_delete", options={"expose" = true})
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('AppBundle:Person')->find($id);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('AppBundle:Person')->find($id);
+        $em->remove($entity);
+        $em->flush();
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Person entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
-        }
-
-        return $this->redirect($this->generateUrl('person'));
-    }
-
-    /**
-     * Creates a form to delete a Person entity by id.
-     *
-     * @param mixed $id The entity id
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm($id)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('person_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-        ;
+        return new JsonResponse($id);
     }
 }

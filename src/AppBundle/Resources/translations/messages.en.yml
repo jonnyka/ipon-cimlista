@@ -1,17 +1,28 @@
 app_bundle:
+  label:
+    create: 'Create'
+    update: 'Update'
   menu:
-    sajt: 'Sajt'
+    admin: 'Admin'
+    people: 'People list'
   message:
     back: 'Back'
     logo: 'iPon people list'
     welcome: 'Welcome to the iPon people list'
   person:
     address: 'Address'
+    addresses: 'Addresses'
+    createdAt: 'Created at'
     mail: 'E-mail'
+    mails: 'E-mails'
     name: 'Name'
+    operations: 'Operations'
     people: 'People list'
     personCreate: 'Create person'
+    personEdit: 'Edit person'
     phone: 'Phone'
+    phones: 'Phones'
+    updatedAt: 'Updated at'
   validate:
     person:
       name:
