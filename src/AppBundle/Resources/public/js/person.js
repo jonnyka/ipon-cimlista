@@ -48,6 +48,7 @@ var table = $('#personList').DataTable({
                         open: function() {
                             $('.ui-dialog-titlebar-close').addClass('ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only');
                             $('.ui-dialog-titlebar-close').append('<span class="ui-button-icon-primary ui-icon ui-icon-closethick"></span><span class="ui-button-text">close</span>');
+                            $(this).parents('.ui-dialog').attr('tabindex', -1)[0].focus();
                         }
                     });
                 });
