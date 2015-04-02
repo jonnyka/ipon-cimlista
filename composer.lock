@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d45a7129b53bc79057035a78d42cca82",
+    "hash": "b0449fd2cb51beeb6a83a1a0d8a00675",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1284,17 +1284,17 @@
         },
         {
             "name": "sensio/framework-extra-bundle",
-            "version": "v3.0.6",
+            "version": "v3.0.7",
             "target-dir": "Sensio/Bundle/FrameworkExtraBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioFrameworkExtraBundle.git",
-                "reference": "1c3ed356bd1ff67cd71806efbb71511644035c85"
+                "reference": "5c37623576ea9e841b87dc0d85414d98fa6f7abb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/1c3ed356bd1ff67cd71806efbb71511644035c85",
-                "reference": "1c3ed356bd1ff67cd71806efbb71511644035c85",
+                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/5c37623576ea9e841b87dc0d85414d98fa6f7abb",
+                "reference": "5c37623576ea9e841b87dc0d85414d98fa6f7abb",
                 "shasum": ""
             },
             "require": {
@@ -1335,7 +1335,7 @@
                 "annotations",
                 "controllers"
             ],
-            "time": "2015-03-24 15:12:07"
+            "time": "2015-04-02 12:28:58"
         },
         {
             "name": "sensiolabs/security-checker",
@@ -1617,16 +1617,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.6.5",
+            "version": "v2.6.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "80833da9d04b004fa59fd23102e6dfad80c98106"
+                "reference": "48c9e835a877adfb023b8b6d033d9dd14f342b4b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/80833da9d04b004fa59fd23102e6dfad80c98106",
-                "reference": "80833da9d04b004fa59fd23102e6dfad80c98106",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/48c9e835a877adfb023b8b6d033d9dd14f342b4b",
+                "reference": "48c9e835a877adfb023b8b6d033d9dd14f342b4b",
                 "shasum": ""
             },
             "require": {
@@ -1730,7 +1730,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2015-03-17 14:58:46"
+            "time": "2015-04-01 16:55:26"
         },
         {
             "name": "twig/extensions",
